@@ -1,4 +1,4 @@
-# Scripts to help identify slow requests on AWS
+# Scripts to help identify Unee-T slow requests on AWS
 
 The elephant in the room is that there is no way to easy link slow HTTP
 requests with their slow backend query. So there is a lot of guesswork and
