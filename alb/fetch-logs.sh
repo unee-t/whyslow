@@ -60,9 +60,8 @@ seetoday() {
 			;;
 	esac
 
-	echo aws s3 --profile $AWS_PROFILE sync s3://$STAGE-logs-unee-t/$1/AWSLogs/$(acc $STAGE)/elasticloadbalancing/ap-southeast-1/ $STAGE-$1
-	aws s3 --profile $AWS_PROFILE sync s3://$STAGE-logs-unee-t/$1/AWSLogs/$(acc $STAGE)/elasticloadbalancing/ap-southeast-1/ $STAGE-$1
-	zcat $STAGE-$1/$(date +'%Y/%m/%d/')*.log.gz | awk '{print $7, $4, $10, $13, $14, $15}' | sort
+	aws s3 --profile $AWS_PROFILE sync s3://$STAGE-logs-unee-t/$1/AWSLogs/$(acc $STAGE)/elasticloadbalancing/ap-southeast-1/$(date +'%Y/%m/%d/') $STAGE-$1
+	zcat $STAGE-$1/*.log.gz | awk '{print $7, $4, $10, $13, $14, $15}' | sort
 }
 
 seetoday ${1-bugzilla}
