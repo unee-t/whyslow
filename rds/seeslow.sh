@@ -44,5 +44,5 @@ shift "$((OPTIND-1))"   # Discard the options and sentinel --
 
 echo Connecting to ${STAGE^^} $(domain $STAGE)
 
-echo 'select * from slow_log WHERE start_time >=(CURRENT_DATE - INTERVAL 1 HOUR) ORDER BY query_time\G;' |
+echo 'select * from slow_log WHERE (start_time BETWEEN DATE_SUB(NOW(), INTERVAL 10 MINUTE) AND NOW() AND db = "unee_t_enterprise") ORDER BY query_time\G;' |
 mysql -h $(domain $STAGE) -P 3306 -u root --password=$(aws --profile uneet-$STAGE ssm get-parameters --names MYSQL_ROOT_PASSWORD --with-decryption --query Parameters[0].Value --output text) mysql
